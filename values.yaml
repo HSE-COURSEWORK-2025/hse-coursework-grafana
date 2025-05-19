@@ -1,0 +1,10 @@
+adminPassword: "admin"
+service:
+  type: LoadBalancer
+persistence:
+  enabled: true
+env:
+  # базовый URL с префиксом /grafana
+  GF_SERVER_ROOT_URL: "/grafana"
+  # включаем работу из подпути
+  GF_SERVER_SERVE_FROM_SUB_PATH: "true"
