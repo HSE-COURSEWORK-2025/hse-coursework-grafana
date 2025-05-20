@@ -1,10 +1,44 @@
+# values.yaml
+
 adminPassword: "admin"
+
 service:
   type: LoadBalancer
+
 persistence:
   enabled: true
+
 env:
-  # базовый URL с префиксом /grafana
   GF_SERVER_ROOT_URL: "/grafana"
-  # включаем работу из подпути
   GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+
+# provisioning Postgres‑datasource
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Postgres
+        uid: DS_POSTGRES
+        type: postgres
+        access: proxy
+        url: 192.168.0.180:5432
+        database: postgres
+        user: postgres
+        secureJsonData:
+          password: postgres
+        isDefault: true
+        jsonData:
+          sslmode: disable
+          postgresVersion: 1200
+          timeInterval: 1s
+
+# единый блок sidecar — здесь оба под‐блока
+sidecar:
+  datasources:
+    enabled: true
+    intervalSeconds: 30
+
+  dashboards:
+    enabled: true           # Включаем поиск дашбордов
+    label: grafana_dashboard  # Метка, по которой sidecar будет их подлавливать
+    folder: /var/lib/grafana/dashboards  # Папка в контейнере Grafana
