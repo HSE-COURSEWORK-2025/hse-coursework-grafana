@@ -32,6 +32,21 @@ datasources:
           postgresVersion: 1200
           timeInterval: 1s
 
+      - name: Postgres_records
+        uid: DS_POSTGRES_records
+        type: postgres
+        access: proxy
+        url: 192.168.0.180:5432
+        database: records
+        user: postgres
+        secureJsonData:
+          password: postgres
+        isDefault: false
+        jsonData:
+          sslmode: disable
+          postgresVersion: 1200
+          timeInterval: 1s
+
 # единый блок sidecar — здесь оба под‐блока
 sidecar:
   datasources:
