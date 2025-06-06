@@ -46,6 +46,21 @@ datasources:
           sslmode: disable
           postgresVersion: 1200
           timeInterval: 1s
+      
+      - name: Postgres_ratings
+        uid: DS_POSTGRES_ratings
+        type: postgres
+        access: proxy
+        url: 192.168.0.180:5432
+        database: ratings
+        user: postgres
+        secureJsonData:
+          password: postgres
+        isDefault: false
+        jsonData:
+          sslmode: disable
+          postgresVersion: 1200
+          timeInterval: 1s
 
 # единый блок sidecar — здесь оба под‐блока
 sidecar:

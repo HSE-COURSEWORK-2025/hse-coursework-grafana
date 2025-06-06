@@ -550,7 +550,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "DS_POSTGRES"
+        "uid": "DS_POSTGRES_ratings"
       },
       "fieldConfig": {
         "defaults": {
@@ -595,13 +595,17 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "DS_POSTGRES_ratings"
+          },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "select 4",
+          "rawSql": "SELECT\n  AVG(value) \n  \nFROM rating_records;\n",
           "refId": "A",
           "sql": {
             "columns": [
