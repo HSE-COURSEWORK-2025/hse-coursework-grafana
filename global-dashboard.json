@@ -70,7 +70,7 @@
         "showThresholdMarkers": false,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.1+security-01",
       "targets": [
         {
           "datasource": {
@@ -180,7 +180,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.1+security-01",
       "targets": [
         {
           "datasource": {
@@ -190,7 +190,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT \n    diagnosis_name,\n    COUNT(*) AS high_risk_predictions\nFROM ml_predictions_records\nWHERE result_value::NUMERIC > 0.75\nGROUP BY diagnosis_name\nORDER BY high_risk_predictions DESC;",
+          "rawSql": "WITH class_map AS (\n  -- pairs: оригинальный diagnosis_name, ключ в JSON, имя для вывода\n  SELECT * FROM (VALUES\n    ('insomnia_apnea', 'Insomnia',     'Insomnia'),\n    ('insomnia_apnea', 'Sleep_Apnea',  'Sleep Apnea'),\n    ('depression',     '1',            'Depression'),\n    ('hypertension',   'High',         'Hypertension')\n  ) AS t(orig_diag, class_key, display_name)\n)\nSELECT\n  cm.display_name               AS diagnosis_name,\n  COUNT(m.*) FILTER (\n    WHERE (m.result_value::jsonb->>cm.class_key)::numeric > 0.6\n  )                               AS high_risk_predictions\nFROM class_map cm\nLEFT JOIN ml_predictions_records m\n  ON m.diagnosis_name = cm.orig_diag\nGROUP BY cm.display_name\nORDER BY high_risk_predictions DESC;\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -290,7 +290,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.1+security-01",
       "targets": [
         {
           "datasource": {
@@ -400,7 +400,7 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.1+security-01",
       "targets": [
         {
           "datasource": {
@@ -513,7 +513,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0+security-01",
+      "pluginVersion": "12.0.1+security-01",
       "targets": [
         {
           "datasource": {
@@ -595,7 +595,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.1",
+      "pluginVersion": "12.0.1+security-01",
       "targets": [
         {
           "datasource": {
