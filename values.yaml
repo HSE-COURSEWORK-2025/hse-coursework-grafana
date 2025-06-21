@@ -18,7 +18,7 @@ datasources:
         uid: DS_POSTGRES
         type: postgres
         access: proxy
-        url: 192.168.0.180:5432
+        url: 25.8.172.192:5432
         database: postgres
         user: postgres
         secureJsonData:
@@ -33,7 +33,7 @@ datasources:
         uid: DS_POSTGRES_records
         type: postgres
         access: proxy
-        url: 192.168.0.180:5432
+        url: 25.8.172.192:5432
         database: records
         user: postgres
         secureJsonData:
@@ -48,7 +48,7 @@ datasources:
         uid: DS_POSTGRES_ratings
         type: postgres
         access: proxy
-        url: 192.168.0.180:5432
+        url: 25.8.172.192:5432
         database: ratings
         user: postgres
         secureJsonData:
