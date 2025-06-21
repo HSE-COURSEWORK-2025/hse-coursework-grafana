@@ -1,5 +1,3 @@
-# values.yaml
-
 adminPassword: "admin"
 
 service:
@@ -12,7 +10,6 @@ env:
   GF_SERVER_ROOT_URL: "/grafana"
   GF_SERVER_SERVE_FROM_SUB_PATH: "true"
 
-# provisioning Postgres‑datasource
 datasources:
   datasources.yaml:
     apiVersion: 1
